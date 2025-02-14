@@ -1,0 +1,1 @@
+ D:\\Cellula\ Technologies\\projects\\ai_weather\\ai_weather\\.dart_tool\\flutter_build\\ac2b617b32a26251cc9a885992cc9c16\\native_assets.yaml: 
