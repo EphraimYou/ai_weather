@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           title: AppStrings.projectNme,
           theme: AppTheme.lightTheme,
           debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutes.signup,
+          initialRoute: AppRoutes.home,
           onGenerateRoute: (settings) => Routes.onGenerate(settings),
         );
       },

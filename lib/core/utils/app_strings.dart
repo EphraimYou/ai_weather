@@ -8,7 +8,9 @@ class AppStrings {
   static const loginSucc = 'Login Successfully';
 
   //exception
-  static const errorNetwork = 'No Internet connection"';
+  static const errorNetwork = 'No Internet connection';
+  static const failedToFetch = 'Failed to fetch weather data';
+  static const emptyResponse = 'API returned empty response';
 
   static const skip = 'Skip';
   static const createAcc = 'Create Account';
