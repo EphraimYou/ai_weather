@@ -1,3 +1,4 @@
+import 'package:ai_weather/core/utils/app_strings.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -6,19 +7,19 @@ class LocationServices {
     try {
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
-        throw Exception('Location services are disabled.');
+        throw Exception(AppStrings.errorLocationService);
       }
 
       LocationPermission permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.denied) {
-          throw Exception('Location permissions are denied.');
+          throw Exception(AppStrings.errorLocationService);
         }
       }
 
       if (permission == LocationPermission.deniedForever) {
-        throw Exception('Location permissions are permanently denied.');
+        throw Exception(AppStrings.errorPermission);
       }
 
       // Get Current Position
@@ -32,15 +33,12 @@ class LocationServices {
       Placemark place;
       if (placeMarks.isNotEmpty) {
         place = placeMarks.first;
-        // print('Country: ${place.country}');
-        // print('Region: ${place.administrativeArea}');
       } else {
-        throw Exception('No placemark found.');
+        throw Exception(AppStrings.noPlacemark);
       }
       return place.country ?? 'cairo';
     } catch (e) {
-      print('Error getting location: $e');
+      return null;
     }
-    return null;
   }
 }

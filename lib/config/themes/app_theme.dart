@@ -11,6 +11,7 @@ class AppTheme {
       ),
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.white,
+        statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.dark,
       ),
     ),

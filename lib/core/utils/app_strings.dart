@@ -12,6 +12,9 @@ class AppStrings {
   static const failedToFetch = 'Failed to fetch weather data';
   static const emptyResponse = 'API returned empty response';
   static const locationDined = 'Location services are disabled.';
+  static const errorPermission = 'Location permissions are permanently denied.';
+  static const noPlacemark = 'No placemark found.';
+  static const errorLocationService = 'Location services are disabled.';
 
   static const skip = 'Skip';
   static const createAcc = 'Create Account';

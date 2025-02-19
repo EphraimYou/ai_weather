@@ -65,7 +65,7 @@ class BottomSheetWidget extends StatelessWidget {
               buildItem(
                   icon: Icons.visibility,
                   title: 'visibility',
-                  value: visibility),
+                  value: visibility)
             ],
           ),
         ],

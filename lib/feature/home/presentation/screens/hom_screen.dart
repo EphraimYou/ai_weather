@@ -57,7 +57,7 @@ class HomeScreen extends StatelessWidget {
                       tempValue: weatherDetails?.maxTempC.toString() ?? 'null',
                       cloudValue:
                           cubit.weatherData?.current?.cloud.toString() ??
-                              'null',
+                              '3.3.3.',
                       humidityValue:
                           weatherDetails?.avgHumidity.toString() ?? 'null',
                     ),
