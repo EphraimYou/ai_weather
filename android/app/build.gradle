@@ -9,7 +9,8 @@ plugins {
 
 android {
     namespace = "com.example.ai_weather"
-    compileSdk = flutter.compileSdkVersion
+    // compileSdk = flutter.compileSdkVersion
+    compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

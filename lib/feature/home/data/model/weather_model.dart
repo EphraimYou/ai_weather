@@ -160,16 +160,16 @@ class Condition {
 }
 
 class Forecast {
-  List<ForecastDay>? forecastday;
+  List<ForecastDay>? forecastDay;
 
-  Forecast({this.forecastday});
+  Forecast({this.forecastDay});
 
   Forecast.fromJson(Map<String, dynamic> json) {
     if (json['forecastday'] != null) {
-      forecastday = <ForecastDay>[];
+      forecastDay = <ForecastDay>[];
       json['forecastday'].forEach(
         (v) {
-          forecastday!.add(ForecastDay.fromJson(v));
+          forecastDay!.add(ForecastDay.fromJson(v));
         },
       );
     }

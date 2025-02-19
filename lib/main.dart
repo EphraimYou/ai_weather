@@ -14,6 +14,7 @@ void main() async {
   await setupLocator();
   await Firebase.initializeApp();
   await CacheHelper.init();
+
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }

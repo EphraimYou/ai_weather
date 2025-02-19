@@ -1,7 +1,13 @@
+import 'package:ai_weather/core/components/toast.dart';
 import 'package:ai_weather/core/di/service_locator.dart';
-import 'package:ai_weather/core/utils/app_strings.dart';
+import 'package:ai_weather/core/utils/app_assets.dart';
 import 'package:ai_weather/feature/home/domain/use_case/get_weather_use_case.dart';
 import 'package:ai_weather/feature/home/presentation/controller/cubit/home_cubit.dart';
+import 'package:ai_weather/feature/home/presentation/widgets/button.dart';
+import 'package:ai_weather/feature/home/presentation/widgets/indicator.dart';
+import 'package:ai_weather/feature/home/presentation/widgets/location.dart';
+import 'package:ai_weather/feature/home/presentation/widgets/temp_details.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,34 +16,66 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home Screen'),
-        centerTitle: true,
-      ),
-      body: BlocProvider(
-        create: (context) =>
-            HomeCubit(weatherUseCase: sl<GetWeatherUseCase>())..getHomeData(),
-        child: BlocConsumer<HomeCubit, HomeState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            if (state is HomeLoadingState) {
-              return Center(child: CircularProgressIndicator());
-            } else if (state is HomeSuccessState) {
-              return Center(
-                child: Text(
-                  '${state.weatherModel.location?.country}',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.blue,
+    return SafeArea(
+      child: Scaffold(
+        body: BlocProvider(
+          create: (context) =>
+              HomeCubit(weatherUseCase: sl<GetWeatherUseCase>())..getHomeData(),
+          child: BlocConsumer<HomeCubit, HomeState>(listener: (context, state) {
+            if (state is HomeErrorState) {
+              showMessage(
+                message: state.errorMessage,
+                state: ToastStates.error,
+                context: context,
+              );
+            }
+          }, builder: (context, state) {
+            HomeCubit cubit = HomeCubit.get(context);
+            var weatherDetails = cubit
+                .weatherData?.forecast?.forecastDay?[cubit.currentIndex].day;
+            return ConditionalBuilder(
+              condition: cubit.weatherData == null,
+              builder: (context) => Center(child: CircularProgressIndicator()),
+              fallback: (context) => Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(AppAssets.background),
+                    fit: BoxFit.cover,
                   ),
                 ),
-              );
-            } else {
-              return Center(child: Text(AppStrings.failedToFetch));
-            }
-          },
+                child: Column(
+                  children: [
+                    DayButton(),
+                    LocationWidget(
+                      image:
+                          'https:${weatherDetails?.condition?.icon ?? 'null'}',
+                      country: cubit.weatherData?.location?.country ?? 'null',
+                      region: cubit.weatherData?.location?.name ?? 'null',
+                    ),
+                    TempDetails(
+                      tempValue: weatherDetails?.maxTempC.toString() ?? 'null',
+                      cloudValue:
+                          cubit.weatherData?.current?.cloud.toString() ??
+                              'null',
+                      humidityValue:
+                          weatherDetails?.avgHumidity.toString() ?? 'null',
+                    ),
+                    Spacer(),
+                    Indicator(
+                      maxTemp: weatherDetails?.maxTempC.toString() ?? 'null',
+                      wind: weatherDetails?.maxWindKph.toString() ?? 'null',
+                      precipitate:
+                          weatherDetails?.totalPrecipIn.toString() ?? 'null',
+                      snow: weatherDetails?.totalSnowCm.toString() ?? 'null',
+                      uv: weatherDetails?.uv.toString() ?? 'null',
+                      visibility: weatherDetails?.avgVisKm.toString() ?? 'null',
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }),
         ),
       ),
     );
