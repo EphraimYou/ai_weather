@@ -14,6 +14,7 @@ void main() async {
   await setupLocator();
   await Firebase.initializeApp();
   await CacheHelper.init();
+
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
           title: AppStrings.projectNme,
           theme: AppTheme.lightTheme,
           debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutes.signup,
+          initialRoute: AppRoutes.home,
           onGenerateRoute: (settings) => Routes.onGenerate(settings),
         );
       },
