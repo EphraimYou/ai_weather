@@ -16,7 +16,7 @@ class WeatherDataSourceImpl implements WeatherDataSource {
         endPoint: EndPoints.weatherEndPoint,
         parameter: {
           'q': location,
-          'days': '3',
+          'days': '14',
           'hour': '24',
           'key': AppConstants.apiKey,
         });

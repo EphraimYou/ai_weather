@@ -3,11 +3,13 @@ import 'package:ai_weather/core/di/service_locator.dart';
 import 'package:ai_weather/core/utils/app_assets.dart';
 import 'package:ai_weather/feature/home/domain/use_case/get_weather_use_case.dart';
 import 'package:ai_weather/feature/home/presentation/controller/cubit/home_cubit.dart';
-import 'package:ai_weather/feature/home/presentation/widgets/button.dart';
+import 'package:ai_weather/feature/home/presentation/widgets/calender.dart';
 import 'package:ai_weather/feature/home/presentation/widgets/indicator.dart';
 import 'package:ai_weather/feature/home/presentation/widgets/location.dart';
 import 'package:ai_weather/feature/home/presentation/widgets/temp_details.dart';
+
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,7 +48,13 @@ class HomeScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    DayButton(),
+                    Calender(
+                      focusDate: HomeCubit.get(context).selectedDate,
+                      onDateChange: (date) {
+                        HomeCubit.get(context).changeDateState(date);
+                        HomeCubit.get(context).changeIndex(date);
+                      },
+                    ),
                     LocationWidget(
                       image:
                           'https:${weatherDetails?.condition?.icon ?? 'null'}',
@@ -57,7 +65,7 @@ class HomeScreen extends StatelessWidget {
                       tempValue: weatherDetails?.maxTempC.toString() ?? 'null',
                       cloudValue:
                           cubit.weatherData?.current?.cloud.toString() ??
-                              '3.3.3.',
+                              'null',
                       humidityValue:
                           weatherDetails?.avgHumidity.toString() ?? 'null',
                     ),

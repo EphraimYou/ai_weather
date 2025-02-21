@@ -20,3 +20,5 @@ final class HomeErrorState extends HomeState {
 }
 
 final class ChangeIndexState extends HomeState {}
+
+final class ChangeDateTimeState extends HomeState {}
