@@ -33,9 +33,27 @@ class HomeCubit extends Cubit<HomeState> {
 
   int currentIndex = 0;
 
-  void changeIndex(int index) {
+  // void changeIndex(int index) {
+  //   emit(HomeInitial());
+  //   currentIndex = index;
+  //   emit(ChangeIndexState());
+  // }
+
+  DateTime selectedDate = DateTime.now();
+  void changeDateState(DateTime date) {
     emit(HomeInitial());
-    currentIndex = index;
+    selectedDate = date;
+    emit(ChangeDateTimeState());
+  }
+
+  void changeIndex(DateTime date) {
+    final now = DateTime.now();
+    emit(HomeInitial());
+
+    // Compute the difference in days
+    currentIndex =
+        date.difference(DateTime(now.year, now.month, now.day)).inDays;
+
     emit(ChangeIndexState());
   }
 }

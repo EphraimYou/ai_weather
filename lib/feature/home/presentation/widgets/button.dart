@@ -26,7 +26,7 @@ class DayButton extends StatelessWidget {
           index: index,
           context: context,
           onTp: () {
-            HomeCubit.get(context).changeIndex(index);
+            // HomeCubit.get(context).changeIndex(index);
           },
         ),
       ),
