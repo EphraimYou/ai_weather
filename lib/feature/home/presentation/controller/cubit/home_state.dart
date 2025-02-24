@@ -19,6 +19,22 @@ final class HomeErrorState extends HomeState {
   const HomeErrorState({required this.errorMessage});
 }
 
+/* -------------------------------------------------------------------------- */
+final class GetPredictionLoadingState extends HomeState {}
+
+final class GetPredictionSuccessState extends HomeState {
+  final int result;
+
+  const GetPredictionSuccessState({required this.result});
+}
+
+final class GetPredictionErrorState extends HomeState {
+  final String errorMessage;
+
+  const GetPredictionErrorState({required this.errorMessage});
+}
+
+/* -------------------------------------------------------------------------- */
 final class ChangeIndexState extends HomeState {}
 
 final class ChangeDateTimeState extends HomeState {}

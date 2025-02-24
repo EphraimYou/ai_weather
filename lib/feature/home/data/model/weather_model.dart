@@ -25,15 +25,16 @@ class Location {
   int? localTimeEpoch;
   String? localTime;
 
-  Location(
-      {this.name,
-      this.region,
-      this.country,
-      this.lat,
-      this.lon,
-      this.tzId,
-      this.localTimeEpoch,
-      this.localTime});
+  Location({
+    this.name,
+    this.region,
+    this.country,
+    this.lat,
+    this.lon,
+    this.tzId,
+    this.localTimeEpoch,
+    this.localTime,
+  });
 
   Location.fromJson(Map<String, dynamic> json) {
     name = json['name'];

@@ -75,7 +75,7 @@ class BottomSheetWidget extends StatelessWidget {
 
   Widget header() {
     return Padding(
-      padding: const EdgeInsetsDirectional.only(start: 20),
+      padding: const EdgeInsetsDirectional.symmetric(horizontal: 20.0),
       child: Row(
         children: [
           Icon(
@@ -90,6 +90,21 @@ class BottomSheetWidget extends StatelessWidget {
               color: Colors.white,
               fontSize: 22.sp,
               fontWeight: FontWeight.w500,
+            ),
+          ),
+          Spacer(),
+          MaterialButton(
+            onPressed: () {},
+            color: Colors.lightBlue[900],
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.r)),
+            child: Text(
+              'Prediction',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         ],
