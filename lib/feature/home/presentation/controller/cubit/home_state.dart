@@ -22,11 +22,7 @@ final class HomeErrorState extends HomeState {
 /* -------------------------------------------------------------------------- */
 final class GetPredictionLoadingState extends HomeState {}
 
-final class GetPredictionSuccessState extends HomeState {
-  final int result;
-
-  const GetPredictionSuccessState({required this.result});
-}
+final class GetPredictionSuccessState extends HomeState {}
 
 final class GetPredictionErrorState extends HomeState {
   final String errorMessage;

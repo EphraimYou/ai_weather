@@ -73,6 +73,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     Spacer(),
                     Indicator(
+                      predictionValue: cubit.predictionResult ?? 0,
                       maxTemp: weatherDetails?.maxTempC.toString() ?? 'null',
                       wind: weatherDetails?.maxWindKph.toString() ?? 'null',
                       precipitate:

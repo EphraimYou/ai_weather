@@ -24,15 +24,14 @@ class ApiManager {
     required String endPoint,
     required Map<String, dynamic> parameter,
   }) async {
-    Uri url =
-        Uri.parse('$baseUrl$endPoint'); // ✅ Use Uri.parse() for better handling
+    Uri url = Uri.parse('$baseUrl$endPoint');
 
     return await http.post(
       url,
       headers: {
         'Content-Type': 'application/json',
       },
-      body: jsonEncode(parameter), // ✅ Convert Map to JSON string
+      body: jsonEncode(parameter),
     );
   }
 

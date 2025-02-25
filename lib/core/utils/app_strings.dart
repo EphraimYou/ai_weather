@@ -41,6 +41,9 @@ class AppStrings {
   static const loginSubtitle =
       'Use demo account to have a better vision, it\'s pre filled.';
   static const dontHaveAcc = 'Don\'t have an account';
-
-  static const nullText = 'null';
+  // alert
+  static const goodWeather =
+      'Great news! The weather is good. You can do your exercise safely.';
+  static const badWeather =
+      'Unfortunately, the weather is bad. It\'s not safe for exercise right now.';
 }

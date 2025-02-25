@@ -1,5 +1,7 @@
+import 'package:ai_weather/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:quickalert/quickalert.dart';
 
 class BottomSheetWidget extends StatelessWidget {
   final String maxTemp;
@@ -8,6 +10,7 @@ class BottomSheetWidget extends StatelessWidget {
   final String snow;
   final String uv;
   final String visibility;
+  final int predictionValue;
 
   const BottomSheetWidget({
     super.key,
@@ -17,6 +20,7 @@ class BottomSheetWidget extends StatelessWidget {
     required this.snow,
     required this.uv,
     required this.visibility,
+    required this.predictionValue,
   });
 
   @override
@@ -43,7 +47,7 @@ class BottomSheetWidget extends StatelessWidget {
                 size: 50,
                 color: Colors.white,
               )),
-          header(),
+          header(context: context, predictionValue: predictionValue),
           SizedBox(height: 20.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -52,9 +56,10 @@ class BottomSheetWidget extends StatelessWidget {
                   icon: Icons.thermostat, title: 'max temp', value: maxTemp),
               buildItem(icon: Icons.water_sharp, title: 'wind', value: wind),
               buildItem(
-                  icon: Icons.water_drop_outlined,
-                  title: 'precipitate',
-                  value: precipitate),
+                icon: Icons.water_drop_outlined,
+                title: 'precipitate',
+                value: precipitate,
+              ),
             ],
           ),
           Row(
@@ -73,7 +78,7 @@ class BottomSheetWidget extends StatelessWidget {
     );
   }
 
-  Widget header() {
+  Widget header({required BuildContext context, required int predictionValue}) {
     return Padding(
       padding: const EdgeInsetsDirectional.symmetric(horizontal: 20.0),
       child: Row(
@@ -94,7 +99,23 @@ class BottomSheetWidget extends StatelessWidget {
           ),
           Spacer(),
           MaterialButton(
-            onPressed: () {},
+            onPressed: () {
+              if (predictionValue == 1) {
+                QuickAlert.show(
+                  context: context,
+                  autoCloseDuration: Duration(seconds: 10),
+                  type: QuickAlertType.success,
+                  text: AppStrings.goodWeather,
+                );
+              } else {
+                QuickAlert.show(
+                  context: context,
+                  autoCloseDuration: Duration(seconds: 10),
+                  type: QuickAlertType.warning,
+                  text: AppStrings.badWeather,
+                );
+              }
+            },
             color: Colors.lightBlue[900],
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.r)),

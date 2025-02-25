@@ -20,14 +20,16 @@ class WeatherEntity extends Equatable {
   /// - Index 3: Mild (1 if 20°C ≤ temperature ≤ 30°C)
   /// - Index 4: Humid (1 if humidity > 60%)
 
-  List<int> get weatherCategory {
-    return [
-      precipitation > 0 ? 1 : 0, // Rainy
-      (cloudiness == 0 && precipitation == 0) ? 1 : 0, // Sunny
-      temperature > 30 ? 1 : 0, // Hot
-      (temperature >= 20 && temperature <= 30) ? 1 : 0, // Mild
-      humidity > 60 ? 1 : 0 // Humid
+  List<int> weatherCategory() {
+    List<int> predictionList = [
+      (precipitation > 0.5 || cloudiness > 70) ? 1 : 0, // Rainy
+      (cloudiness < 30 && precipitation == 0) ? 1 : 0, // Sunny
+      (temperature > 30.0) ? 1 : 0, // Hot
+      (temperature >= 20.0 && temperature <= 30.0) ? 1 : 0, // Mild
+      (humidity > 60) ? 1 : 0
     ];
+    print('list of int : $predictionList');
+    return predictionList;
   }
 
   @override
