@@ -1,3 +1,3 @@
-# Home feature
-task 2
-## vadio linke: https://drive.google.com/file/d/1t8ytq5acIZXpnA4waV3rRc_1vArxiB9Y/view?usp=sharing
+# AI model integration 
+Get weather data for 14 days of forecast, not 3 days
+## video link: https://drive.google.com/file/d/1YLx45bhSSMKROtTjBJVEy1LBi9KLOuZV/view?usp=sharing

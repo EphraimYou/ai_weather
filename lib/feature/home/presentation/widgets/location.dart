@@ -16,24 +16,29 @@ class LocationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        SizedBox(
-          height: 60.h,
-          width: 60.w,
-          child: Image(
-            image: NetworkImage(image),
-            fit: BoxFit.cover,
-          ),
-        ),
-        Text(
-          '$region, $country',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w500,
-          ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 60.h,
+              width: 60.w,
+              child: Image(
+                image: NetworkImage(image),
+                fit: BoxFit.cover,
+              ),
+            ),
+            Text(
+              '$region, $country',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
         ),
       ],
     );

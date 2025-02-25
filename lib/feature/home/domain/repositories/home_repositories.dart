@@ -5,4 +5,6 @@ import 'package:dartz/dartz.dart';
 abstract class HomeRepository {
   Future<Either<ServerException, WeatherModel>> getHomeData(
       {required String location});
+  Future<Either<ServerException, int>> getPrediction(
+      {required List<int> features});
 }

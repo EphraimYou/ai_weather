@@ -19,4 +19,15 @@ class HomeRepoImplementation implements HomeRepository {
       return Left(ServerException(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<ServerException, int>> getPrediction(
+      {required List<int> features}) async {
+    try {
+      final result = await weatherDataSource.getPrediction(features: features);
+      return Right(result);
+    } catch (e) {
+      return Left(ServerException(message: e.toString()));
+    }
+  }
 }
