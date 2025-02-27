@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Calender extends StatelessWidget {
   final DateTime focusDate;
@@ -17,7 +18,7 @@ class Calender extends StatelessWidget {
       headerOptions: HeaderOptions(
         headerType: HeaderType.none,
       ),
-      timelineOptions: TimelineOptions(height: 105),
+      timelineOptions: TimelineOptions(height: 105.h),
       onDateChange: onDateChange,
     );
   }

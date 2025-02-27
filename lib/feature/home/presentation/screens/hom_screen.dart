@@ -1,15 +1,14 @@
 import 'package:ai_weather/core/components/toast.dart';
 import 'package:ai_weather/core/di/service_locator.dart';
 import 'package:ai_weather/core/utils/app_assets.dart';
+import 'package:ai_weather/feature/home/domain/use_case/get_prediction_use_case.dart';
 import 'package:ai_weather/feature/home/domain/use_case/get_weather_use_case.dart';
 import 'package:ai_weather/feature/home/presentation/controller/cubit/home_cubit.dart';
 import 'package:ai_weather/feature/home/presentation/widgets/calender.dart';
 import 'package:ai_weather/feature/home/presentation/widgets/indicator.dart';
 import 'package:ai_weather/feature/home/presentation/widgets/location.dart';
 import 'package:ai_weather/feature/home/presentation/widgets/temp_details.dart';
-
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,8 +20,11 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: BlocProvider(
-          create: (context) =>
-              HomeCubit(weatherUseCase: sl<GetWeatherUseCase>())..getHomeData(),
+          create: (context) => HomeCubit(
+              weatherUseCase: sl<GetWeatherUseCase>(),
+              predictionUseCase: sl<GetPredictionUseCase>())
+            ..getPrediction()
+            ..getHomeData(),
           child: BlocConsumer<HomeCubit, HomeState>(listener: (context, state) {
             if (state is HomeErrorState) {
               showMessage(
@@ -71,6 +73,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     Spacer(),
                     Indicator(
+                      predictionValue: cubit.predictionResult ?? 0,
                       maxTemp: weatherDetails?.maxTempC.toString() ?? 'null',
                       wind: weatherDetails?.maxWindKph.toString() ?? 'null',
                       precipitate:

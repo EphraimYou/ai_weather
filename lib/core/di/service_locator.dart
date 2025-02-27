@@ -15,6 +15,7 @@ import 'package:ai_weather/feature/home/data/data_source/remote/weather_data_sou
 import 'package:ai_weather/feature/home/data/data_source/remote/weather_data_source_impl.dart';
 import 'package:ai_weather/feature/home/data/repository/home_repo_implementation.dart';
 import 'package:ai_weather/feature/home/domain/repositories/home_repositories.dart';
+import 'package:ai_weather/feature/home/domain/use_case/get_prediction_use_case.dart';
 import 'package:ai_weather/feature/home/domain/use_case/get_weather_use_case.dart';
 import 'package:ai_weather/feature/home/presentation/controller/cubit/home_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -50,9 +51,11 @@ Future<void> setupLocator() async {
   //! Home Feature
 
   // bloc
-  sl.registerFactory(() => HomeCubit(weatherUseCase: sl()));
+  sl.registerFactory(
+      () => HomeCubit(weatherUseCase: sl(), predictionUseCase: sl()));
   // Use cases
   sl.registerLazySingleton(() => GetWeatherUseCase(homeRepository: sl()));
+  sl.registerLazySingleton(() => GetPredictionUseCase(homeRepository: sl()));
   // Repository
   sl.registerLazySingleton<HomeRepository>(
       () => HomeRepoImplementation(weatherDataSource: sl()));

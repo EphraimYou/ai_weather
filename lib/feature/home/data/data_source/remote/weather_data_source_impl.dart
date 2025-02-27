@@ -34,4 +34,29 @@ class WeatherDataSourceImpl implements WeatherDataSource {
       throw ServerException(message: AppStrings.failedToFetch);
     }
   }
+
+  @override
+  Future<int> getPrediction({required List<int> features}) async {
+    Map<String, dynamic> body = {'features': features};
+    try {
+      final response = await ApiManager.postData(
+        baseUrl: AppConstants.localHost,
+        endPoint: EndPoints.aiModelEndPoint,
+        parameter: body,
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        final predictionList = responseData['prediction'];
+        final prediction = predictionList[0] as int;
+        print('✅ API Response: $prediction');
+        return prediction;
+      } else {
+        throw ServerException(
+            message: '${AppStrings.failedToFetch} ${response.statusCode}');
+      }
+    } catch (e) {
+      throw ServerException(message: AppStrings.failedToFetch);
+    }
+  }
 }
